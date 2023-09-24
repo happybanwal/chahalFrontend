@@ -21,16 +21,20 @@ const Login = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
   const handleLogin = async () => {
+    setLoading(true)
     try {
       const response = await dispatch(loginUser(email, password))
       console.log('Login successful:', response)
       navigation.navigate('BottomTabNavigator')
+      setLoading(false)
     } catch (error) {
       console.error('Login failed:', error)
       ToastAndroid.show(`${error?.response?.data?.massage}`, ToastAndroid.SHORT)
+      setLoading(false)
     }
   }
 
@@ -59,6 +63,7 @@ const Login = () => {
 
         <CommonButton
           text="Login"
+          loading={loading}
           onPress={() => {
             handleLogin()
           }}

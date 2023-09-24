@@ -21,16 +21,20 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
   const handleRegister = async () => {
+    setLoading(true)
     try {
       const response = await dispatch(registerUser(email, password, name))
       console.log('Register successful:', response)
       navigation.navigate('BottomTabNavigator')
+      setLoading(false)
     } catch (error) {
       console.error('Register failed:', error)
       ToastAndroid.show(`${error?.response?.data?.massage}`, ToastAndroid.SHORT)
+      setLoading(false)
     }
   }
 
