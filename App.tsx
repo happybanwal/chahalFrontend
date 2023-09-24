@@ -12,6 +12,8 @@ import Login from 'src/screens/Login'
 import BottomTabNavigator from 'src/navigation/BottomTabNavigator'
 import Register from 'src/screens/Register'
 import { useFonts } from 'expo-font'
+import { Provider } from 'react-redux'
+import store from 'src/redux/Store'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator()
@@ -28,25 +30,27 @@ export default function App() {
     return null
   }
   return (
-    <NavigationContainer>
-      <JotaiProvider>
-        <PaperProvider>
-          <Stack.Navigator
-            initialRouteName="Login"
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen
-              name="BottomTabNavigator"
-              component={BottomTabNavigator}
-            />
-          </Stack.Navigator>
-        </PaperProvider>
-      </JotaiProvider>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <JotaiProvider>
+          <PaperProvider>
+            <Stack.Navigator
+              initialRouteName="Login"
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Register" component={Register} />
+              <Stack.Screen
+                name="BottomTabNavigator"
+                component={BottomTabNavigator}
+              />
+            </Stack.Navigator>
+          </PaperProvider>
+        </JotaiProvider>
+      </NavigationContainer>
+    </Provider>
   )
 }
 

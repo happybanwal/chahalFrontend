@@ -5,6 +5,8 @@ import { View, Text, Pressable } from 'react-native'
 import CommonButton from 'src/components/common/button/CommonButton'
 import FloatingTextInput from 'src/components/common/textInput/FloatingTextInput'
 import { RootStackParamList } from 'src/types/common'
+import { useSelector, useDispatch } from 'react-redux'
+import { loginUser } from 'src/redux/user/UserAction'
 
 const Login = () => {
   type loginScreenProps = NativeStackNavigationProp<RootStackParamList, 'Login'>
@@ -12,6 +14,7 @@ const Login = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
   return (
     <View className="flex-1 justify-center">
@@ -37,11 +40,17 @@ const Login = () => {
         />
 
         <CommonButton
-          //   loading={loading}
           text="Login"
           onPress={() => {
-            navigation.navigate('Register')
-            // handleSignUp()
+            dispatch(loginUser(email, password))
+              .then((response) => {
+                if (response?.success) {
+                  navigation.navigate('BottomTabNavigator')
+                }
+              })
+              .catch((error) => {
+                console.log(error?.response?.data?.massage)
+              })
           }}
         />
       </View>
