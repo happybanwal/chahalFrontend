@@ -6,16 +6,27 @@ import CommonButton from 'src/components/common/button/CommonButton'
 import FloatingTextInput from 'src/components/common/textInput/FloatingTextInput'
 import { RootStackParamList } from 'src/types/common'
 
-const Login = () => {
+const Register = () => {
   type loginScreenProps = NativeStackNavigationProp<RootStackParamList, 'Login'>
   const navigation = useNavigation<loginScreenProps>()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
 
   return (
     <View className="flex-1 justify-center">
       <View className="p-6">
+        <FloatingTextInput
+          label="Name"
+          placeholder="Enter Your Name"
+          iconName="account"
+          onChangeText={(text) => {
+            setName(text)
+          }}
+          value={name}
+        />
+
         <FloatingTextInput
           label="Email"
           placeholder="Enter Your Email"
@@ -38,9 +49,9 @@ const Login = () => {
 
         <CommonButton
           //   loading={loading}
-          text="Login"
+          text="Sign Up"
           onPress={() => {
-            navigation.navigate('Register')
+            // navigation.navigate('BottomTabNavigator')
             // handleSignUp()
           }}
         />
@@ -48,4 +59,4 @@ const Login = () => {
     </View>
   )
 }
-export default Login
+export default Register
