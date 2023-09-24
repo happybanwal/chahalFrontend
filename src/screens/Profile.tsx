@@ -1,7 +1,7 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../types/common'
-import { Button, View } from 'react-native'
+import { Button, Text, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { GlobalClassName } from 'src/styles/global.styles'
 import { themeAtom } from 'src/store/themeStore'
@@ -18,16 +18,7 @@ const Profile = () => {
   const navigation = useNavigation<settingScreenProps>()
   return (
     <View className={`${GlobalClassName.container} ${themeState}`}>
-      <MotiView
-        from={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ type: 'timing', duration: 400, delay: 200 }}
-      >
-        <Button
-          title="Setting"
-        />
-      </MotiView>
-      <ThemeSwitcher />
+      <Text>PROFILE</Text>
       <StatusBar style="auto" />
     </View>
   )

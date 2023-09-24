@@ -35,7 +35,7 @@ export default function App() {
         <JotaiProvider>
           <PaperProvider>
             <Stack.Navigator
-              initialRouteName="Login"
+              initialRouteName="Register"
               screenOptions={{
                 headerShown: false,
               }}
